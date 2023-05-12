@@ -16,10 +16,3 @@
 2. Create classes for the Deck, Player, and Card.
 3. Utilize Git for version control and collaboration.
 4. Conduct at least 3 pair programming sessions with other learners.
-
-## Optional Features
-
-1. Allow users to input the number of players (more than two).
-2. Implement a score system to determine the winner after a set number of rounds.
-3. Create a simple graphical user interface for the game.
-4. Allow users to choose different deck types or card variations.
