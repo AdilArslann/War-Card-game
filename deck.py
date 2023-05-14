@@ -1,21 +1,16 @@
 import random
 from card import Card
+
 class Deck:
     def __init__(self):
         self.cards = self.generate_deck()
-        self.shuffle()
 
     def generate_deck(self):
-        ranks = list(range(2, 11)) + ["Jack", "Queen", "King", "Ace"]
         suits = ["Hearts", "Diamonds", "Clubs", "Spades"]
-        deck = [Card(rank, suit) for rank in ranks for suit in suits]
+        ranks = list(range(2, 11)) + ["Jack", "Queen", "King", "Ace"]
+        deck = [Card(rank, suit) for suit in suits for rank in ranks]
+        random.shuffle(deck)
         return deck
 
-    def shuffle(self):
-        random.shuffle(self.cards)
-        
     def deal(self):
-        if len(self.cards) > 0:
-            return self.cards.pop()
-        else:
-            return None
+        return self.cards.pop()

@@ -1,18 +1,43 @@
 from deck import Deck
 from player import Player
+import random
 
 def play_round(player1, player2):
     card1 = player1.play_card()
     card2 = player2.play_card()
 
+    print(f"{player1} plays {card1} and {player2} plays {card2}")
+
+    won_cards = [card1, card2]
+    random.shuffle(won_cards)
+
     if card1 > card2:
-        player1.receive_card(card1)
-        player1.receive_card(card2)
+        player1.hand += won_cards
+        print(f"{player1} wins the round!")
     elif card1 < card2:
-        player2.receive_card(card1)
-        player2.receive_card(card2)
+        player2.hand += won_cards
+        print(f"{player2} wins the round!")
     else:
-        print("Tie!")
+        handle_war(player1, player2, won_cards)
+
+def handle_war(player1, player2, war_cards):
+    print("War!")
+
+    while len(player1.hand) > 0 and len(player2.hand) > 0:
+        war_card1 = player1.play_card()
+        war_card2 = player2.play_card()
+
+        war_cards += [war_card1, war_card2]
+        random.shuffle(war_cards)
+
+        if war_card1 > war_card2:
+            player1.hand += war_cards
+            print(f"{player1} wins the war!")
+            break
+        elif war_card1 < war_card2:
+            player2.hand += war_cards
+            print(f"{player2} wins the war!")
+            break
 
 def play_game():
     deck = Deck()
@@ -25,11 +50,16 @@ def play_game():
         player2.receive_card(deck.deal())
 
     # Main game loop
+    round_number = 1
     while len(player1.hand) > 0 and len(player2.hand) > 0:
+        print(f"Round {round_number}:")
         play_round(player1, player2)
+        round_number += 1
 
-    display_winner(player1, player2)
-
+    if len(player1.hand) == 0:
+        print(f"{player2} wins the game!")
+    else:
+        print(f"{player1} wins the game!")
 
 if __name__ == "__main__":
     play_game()

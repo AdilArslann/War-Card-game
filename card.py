@@ -2,7 +2,7 @@ class Card:
     def __init__(self, rank, suit):
         self.rank = rank
         self.suit = suit
-        
+
     def numeric_value(self):
         if isinstance(self.rank, int):
             return self.rank
@@ -14,6 +14,9 @@ class Card:
             return 13
         elif self.rank == "Ace":
             return 14
+
+    def __repr__(self):
+        return f"{self.rank} of {self.suit}"
 
     def __eq__(self, other):
         if isinstance(other, Card):
