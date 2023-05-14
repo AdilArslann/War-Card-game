@@ -13,3 +13,9 @@ class Deck:
 
     def shuffle(self):
         random.shuffle(self.cards)
+        
+    def deal(self):
+        if len(self.cards) > 0:
+            return self.cards.pop()
+        else:
+            return None
